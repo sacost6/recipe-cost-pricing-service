@@ -1,0 +1,2 @@
+obj/Debug/net10.0/Protos/Pricing.cs \
+obj/Debug/net10.0/Protos/PricingGrpc.cs: Protos/pricing.proto

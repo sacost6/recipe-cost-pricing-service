@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package recipecost.pricing.v1; 
+option csharp_namespace = "Recipe.Pricing.V1";
+
+service PricingService {
+  rpc CalculateRecipeCost(CalculateRecipeCostRequest) 
+    returns (CalculateRecipeCostResponse);
+}
+
+message CalculateRecipeCostRequest { 
+  repeated RecipeIngredientInput ingredients = 1; 
+  repeated IngredientPricingInput pricing = 2; 
+  repeated UnitConversionInput conversions = 3; 
+}
+
+message RecipeIngredientInput {
+  string ingredient_id = 1;
+  string quantity = 2;
+  int32 unit_id = 3;
+}
+
+message IngredientPricingInput {
+  IngredientProductInput product = 1;
+  PriceInput price = 2;
+}
+
+message IngredientProductInput {
+  string product_id = 1;
+  string ingredient_id = 2;
+  string package_quantity = 3;
+  int32 package_unit_id = 4;
+}
+
+message PriceInput {
+  string price_id = 1;
+  string product_id = 2;
+  string price = 3;
+  string currency_code = 4;
+}
+
+message UnitConversionInput {
+  string ingredient_id = 1;
+  int32 from_unit_id = 2;
+  int32 to_unit_id = 3;
+  string conversion_factor = 4;
+}
+
+message CalculateRecipeCostResponse {
+  string total_cost = 1;
+  string currency_code = 2;
+  repeated IngredientCostResult ingredients = 3;
+}
+
+message IngredientCostResult {
+  string ingredient_id = 1;
+  string product_id = 2;
+  string price_id = 3;
+  string quantity = 4;
+  int32 unit_id = 5;
+  string cost = 6;
+  string currency_code = 7;
+}

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecipeCost.Pricing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2c4e86ba044cea66411fe8a280e39f17f5fa8e1")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecipeCost.Pricing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecipeCost.Pricing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

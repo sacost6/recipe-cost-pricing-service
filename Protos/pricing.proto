@@ -1,35 +1,42 @@
 syntax = "proto3";
 
-package recipecost.pricing.v1; 
+package recipecost.pricing.v1;
 option csharp_namespace = "Recipe.Pricing.V1";
 
 service PricingService {
-  rpc CalculateRecipeCost(CalculateRecipeCostRequest) 
-    returns (CalculateRecipeCostResponse);
+  rpc CalculateRecipeCost(CalculateRecipeCostRequest) returns (CalculateRecipeCostResponse);
+  rpc SearchUsdaFoods(SearchUsdaFoodsRequest) returns (SearchUsdaFoodsResponse);
+  rpc GetUsdaDensitySuggestions(GetUsdaDensitySuggestionsRequest) returns (GetUsdaDensitySuggestionsResponse);
 }
 
-message CalculateRecipeCostRequest { 
-  repeated RecipeIngredientInput ingredients = 1; 
-  repeated IngredientPricingInput pricing = 2; 
-  repeated UnitConversionInput conversions = 3; 
+message UnitInput {
+  int32 unit_id = 1;
+  string unit_type = 2;
+  string conversion_to_base = 3;
 }
 
-message RecipeIngredientInput {
-  string ingredient_id = 1;
-  string quantity = 2;
-  int32 unit_id = 3;
+message CalculateRecipeCostRequest {
+  repeated RecipeLineInput lines = 1;
+  int32 servings = 2;
 }
 
-message IngredientPricingInput {
-  IngredientProductInput product = 1;
-  PriceInput price = 2;
-}
-
-message IngredientProductInput {
-  string product_id = 1;
+message RecipeLineInput {
+  string recipe_ingredient_id = 1;
   string ingredient_id = 2;
-  string package_quantity = 3;
-  int32 package_unit_id = 4;
+  string quantity = 3;
+  UnitInput unit = 4;
+  optional string density_grams_per_ml = 5;
+  repeated ProductCandidateInput candidates = 6;
+  repeated UnitConversionInput conversions = 7;
+}
+
+message ProductCandidateInput {
+  string product_id = 1;
+  string product_name = 2;
+  string ingredient_id = 3;
+  string package_quantity = 4;
+  UnitInput package_unit = 5;
+  PriceInput price = 6;
 }
 
 message PriceInput {
@@ -37,6 +44,8 @@ message PriceInput {
   string product_id = 2;
   string price = 3;
   string currency_code = 4;
+  string recorded_at = 5;
+  string source = 6;
 }
 
 message UnitConversionInput {
@@ -47,17 +56,58 @@ message UnitConversionInput {
 }
 
 message CalculateRecipeCostResponse {
-  string total_cost = 1;
-  string currency_code = 2;
-  repeated IngredientCostResult ingredients = 3;
+  string known_subtotal = 1;
+  string total_cost = 2;
+  string currency_code = 3;
+  bool is_complete = 4;
+  repeated IngredientCostResult lines = 5;
+  string cost_per_serving = 6;
 }
 
 message IngredientCostResult {
-  string ingredient_id = 1;
-  string product_id = 2;
-  string price_id = 3;
-  string quantity = 4;
-  int32 unit_id = 5;
-  string cost = 6;
-  string currency_code = 7;
+  string recipe_ingredient_id = 1;
+  string ingredient_id = 2;
+  string product_id = 3;
+  string price_id = 4;
+  string cost = 5;
+  string currency_code = 6;
+  string price_recorded_at = 7;
+  string source = 8;
+  string issue = 9;
+  bool has_cost = 10;
+}
+
+message SearchUsdaFoodsRequest {
+  string query = 1;
+}
+
+message SearchUsdaFoodsResponse {
+  repeated UsdaFoodSearchResult foods = 1;
+}
+
+message UsdaFoodSearchResult {
+  int32 fdc_id = 1;
+  string data_type = 2;
+  string description = 3;
+  string brand_owner = 4;
+}
+
+message GetUsdaDensitySuggestionsRequest {
+  int32 fdc_id = 1;
+}
+
+message GetUsdaDensitySuggestionsResponse {
+  repeated UsdaDensitySuggestion suggestions = 1;
+}
+
+message UsdaDensitySuggestion {
+  int32 fdc_id = 1;
+  string data_type = 2;
+  string food_description = 3;
+  int32 portion_id = 4;
+  string portion_amount = 5;
+  string portion_description = 6;
+  string measure_unit = 7;
+  string gram_weight = 8;
+  string density_grams_per_ml = 9;
 }

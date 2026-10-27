@@ -1,15 +1,23 @@
+using RecipeCost.Pricing.Application;
+using RecipeCost.Pricing.Integrations;
 using RecipeCost.Pricing.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddGrpc();
-
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<PricingCalculator>();
+builder.Services.AddHttpClient<UsdaFoodDataClient>(client =>
+{
+    client.BaseAddress = new Uri(
+        builder.Configuration["USDA_FDC_BASE_URL"] ?? "https://api.nal.usda.gov/fdc/v1/");
+    client.Timeout = TimeSpan.FromSeconds(12);
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+app.MapGrpcService<PricingGrpcService>();
+app.MapPricingServiceHttpApi();
+app.MapGet("/", () => Results.Ok(new { service = "recipe-cost-pricing" }));
 
 app.Run();

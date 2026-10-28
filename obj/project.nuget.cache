@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ElBeaM1qhlc=",
+  "dgSpecHash": "MW7MlIGuPFI=",
   "success": true,
-  "projectFilePath": "/home/simon/Documents/Projects/pricing-service/RecipeCost.Pricing.csproj",
+  "projectFilePath": "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/RecipeCost.Pricing.csproj",
   "expectedPackageFiles": [
     "/home/simon/.nuget/packages/google.protobuf/3.27.0/google.protobuf.3.27.0.nupkg.sha512",
     "/home/simon/.nuget/packages/grpc.aspnetcore/2.64.0/grpc.aspnetcore.2.64.0.nupkg.sha512",

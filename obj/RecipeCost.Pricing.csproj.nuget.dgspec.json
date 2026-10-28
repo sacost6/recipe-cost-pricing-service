@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/simon/Documents/Projects/pricing-service/RecipeCost.Pricing.csproj": {}
+    "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/RecipeCost.Pricing.csproj": {}
   },
   "projects": {
-    "/home/simon/Documents/Projects/pricing-service/RecipeCost.Pricing.csproj": {
+    "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/RecipeCost.Pricing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/simon/Documents/Projects/pricing-service/RecipeCost.Pricing.csproj",
+        "projectUniqueName": "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/RecipeCost.Pricing.csproj",
         "projectName": "RecipeCost.Pricing",
-        "projectPath": "/home/simon/Documents/Projects/pricing-service/RecipeCost.Pricing.csproj",
+        "projectPath": "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/RecipeCost.Pricing.csproj",
         "packagesPath": "/home/simon/.nuget/packages/",
-        "outputPath": "/home/simon/Documents/Projects/pricing-service/obj/",
+        "outputPath": "/home/simon/Documents/Projects/recipe-cost-env/pricing-service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/simon/.nuget/NuGet/NuGet.Config"
@@ -69,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.112/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.113/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
